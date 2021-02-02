@@ -64,6 +64,20 @@ void Update(RenderWindow& window) {
     paddles[0].move(0, direction * paddleSpeed * dt);
 
     ball.move(ballVelocity * dt);
+
+    //Collision
+    const float bx = ball.getPosition().x;
+    const float by = ball.getPosition().y;
+    if (by > gameHeight) {
+        ballVelocity.x *= 1.1f;
+        ballVelocity.y *= -1.1f;
+        ball.move(0, -10);
+    }
+    else if (by < 0) {
+        ballVelocity.x *= 1.1f;
+        ballVelocity.y *= -1.1f;
+        ball.move(0, 10);
+    }
 }
 
 void Render(RenderWindow& window) {
