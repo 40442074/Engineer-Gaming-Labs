@@ -27,7 +27,7 @@ void Load() {
         p.setOrigin(paddleSize / 2.0f);
     }
 
-    ball.setRadius(ballRadius - 3);
+    ball.setRadius(ballRadius);
     ball.setOrigin(ballRadius / 2, ballRadius / 2);
 
     paddles[0].setPosition(10 + paddleSize.x / 2, gameHeight / 2);
@@ -86,6 +86,20 @@ void Update(RenderWindow& window) {
         ballVelocity.x *= 1.1f;
         ballVelocity.y *= -1.1f;
         ball.move(0, 10);
+    }
+    else if (bx < paddleSize.x &&
+             by > paddles[0].getPosition().y - (paddleSize.y * 0.5) &&
+             by < paddles[0].getPosition().y + (paddleSize.y * 0.5)) {
+        ballVelocity.x *= -1.1f;
+        ballVelocity.y *= 1.1f;
+        ball.move(10, 0);
+    }
+    else if (bx > gameWidth - paddleSize.x &&
+             by > paddles[1].getPosition().y - (paddleSize.y * 0.5) &&
+             by < paddles[1].getPosition().y + (paddleSize.y * 0.5)) {
+        ballVelocity.x *= -1.1f;
+        ballVelocity.y *= 1.1f;
+        ball.move(-10, 0);
     }
 
     //Reset
