@@ -59,20 +59,21 @@ void Update(RenderWindow& window) {
     paddles[0].move(0, direction * paddleSpeed * dt);
 }
 
+void Render(RenderWindow& window) {
+    window.draw(paddles[0]);
+    window.draw(paddles[1]);
+    window.draw(ball);
+}
+
 int main() {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.0f);
-    shape.setFillColor(sf::Color::Green);
+    RenderWindow window(VideoMode(gameWidth, gameHeight), "PONG");
+
+    Load();
 
     while (window.isOpen()){
-        sf::Event event;
-        while (window.pollEvent(event)){
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-        }
         window.clear();
-        window.draw(shape);
+        Update(window);
+        Render(window);
         window.display();
     }
     return 0;
