@@ -15,6 +15,9 @@ const int gameWidth = 800;
 const int gameHeight = 600;
 const float paddleSpeed = 400.0f;
 
+Vector2f ballVelocity;
+bool server = false;
+
 CircleShape ball;
 RectangleShape paddles[2];
 
@@ -31,6 +34,8 @@ void Load() {
     paddles[1].setPosition(gameWidth -10 - paddleSize.x / 2, gameHeight / 2);
 
     ball.setPosition(gameWidth / 2, gameHeight / 2);
+
+    ballVelocity = { (server ? 100.0f : -100.0f), 60.0f };
 }
 
 void Update(RenderWindow& window) {
@@ -57,6 +62,8 @@ void Update(RenderWindow& window) {
         direction++;
     }
     paddles[0].move(0, direction * paddleSpeed * dt);
+
+    ball.move(ballVelocity * dt);
 }
 
 void Render(RenderWindow& window) {
