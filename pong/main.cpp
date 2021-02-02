@@ -33,7 +33,33 @@ void Load() {
     ball.setPosition(gameWidth / 2, gameHeight / 2);
 }
 
-int main(){
+void Update(RenderWindow& window) {
+    static Clock clock;
+    float dt = clock.restart().asSeconds();
+
+    Event event;
+    while (window.pollEvent(event)) {
+        if (event.type == Event::Closed) {
+            window.close();
+            return;
+        }
+    }
+
+    if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+        window.close();
+    }
+
+    float direction = 0.0f;
+    if (Keyboard::isKeyPressed(controls[0])) {
+        direction--;
+    }
+    if (Keyboard::isKeyPressed(controls[1])) {
+        direction++;
+    }
+    paddles[0].move(0, direction * paddleSpeed * dt);
+}
+
+int main() {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.0f);
     shape.setFillColor(sf::Color::Green);
