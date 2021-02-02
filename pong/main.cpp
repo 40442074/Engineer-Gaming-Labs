@@ -38,6 +38,15 @@ void Load() {
     ballVelocity = { (server ? 100.0f : -100.0f), 60.0f };
 }
 
+void Reset() {
+    paddles[0].setPosition(10 + paddleSize.x / 2, gameHeight / 2);
+    paddles[1].setPosition(gameWidth - 10 - paddleSize.x / 2, gameHeight / 2);
+
+    ball.setPosition(gameWidth / 2, gameHeight / 2);
+
+    ballVelocity = { (server ? 100.0f : -100.0f), 60.0f };
+}
+
 void Update(RenderWindow& window) {
     static Clock clock;
     float dt = clock.restart().asSeconds();
@@ -77,6 +86,16 @@ void Update(RenderWindow& window) {
         ballVelocity.x *= 1.1f;
         ballVelocity.y *= -1.1f;
         ball.move(0, 10);
+    }
+
+    //Reset
+    else if (bx > gameWidth) {
+        // right wall
+        Reset();
+    }
+    else if (bx < 0) {
+        // left wall
+        Reset();
     }
 }
 
