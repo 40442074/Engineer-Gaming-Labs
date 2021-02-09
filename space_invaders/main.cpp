@@ -1,11 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "game.h"
+#include "ship.h"
 
 using namespace sf;
 using namespace std;
 
 Sprite invader;
+Texture spritesheet;
+
+vector<Ship*> ships;
 
 void Load() {
     if (!spritesheet.loadFromFile("res/img/invaders_sheet.png")) {
