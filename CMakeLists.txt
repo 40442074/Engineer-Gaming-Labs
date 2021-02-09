@@ -15,6 +15,11 @@ SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIRECTORY})
 add_subdirectory("lib/sfml")
 set(SFML_INCS "lib/sfml/include")
 link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
+add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND} 
+  -E copy_directory
+    "${PROJECT_SOURCE_DIR}/res"
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION>/res
+)
 
 #### Practical 1 ####
 file(GLOB_RECURSE SOURCES practical_1/*.cpp practical_1/*.h)
@@ -27,3 +32,14 @@ file(GLOB_RECURSE SOURCES pong/*.cpp pong/*.h)
 add_executable(PONG ${SOURCES})
 target_include_directories(PONG PRIVATE ${SFML_INCS})
 target_link_libraries(PONG sfml-graphics)
+
+#### Space Invaders ####
+file(GLOB_RECURSE SOURCES space_invaders/*.cpp space_invaders/*.h)
+add_executable(SPACE_INVADERS ${SOURCES})
+target_include_directories(SPACE_INVADERS PRIVATE ${SFML_INCS})
+target_link_libraries(SPACE_INVADERS sfml-graphics)
+set_target_properties(SPACE_INVADERS 
+    PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
+)
+add_dependencies(SPACE_INVADERS copy_resources)
