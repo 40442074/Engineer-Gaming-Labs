@@ -1,13 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "game.h"
 
 using namespace sf;
 using namespace std;
 
-const int gameWidth = 800;
-const int gameHeight = 600;
-
-Texture spritesheet;
 Sprite invader;
 
 void Load() {
