@@ -27,4 +27,16 @@ Invader::Invader(IntRect ir, Vector2f pos) : Ship(ir) {
 
 void Invader::Update(const float& dt) {
 	Ship::Update(dt);
+
+	move(dt * (direction ? 1.0f : -1.0f) * speed, 0);
+
+	if ((direction && getPosition().x > gameWidth - 16) || (!direction && getPosition().x < 16)) {
+		direction = !direction;
+		for (int i = 0; i < ships.size(); i++) {
+			ships[i]->move(0, 24);
+		}
+	}
 }
+
+bool Invader::direction;
+float Invader::speed;

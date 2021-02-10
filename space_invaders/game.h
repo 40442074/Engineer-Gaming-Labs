@@ -9,3 +9,4 @@ constexpr uint16_t invaders_rows = 5;
 constexpr uint16_t invaders_columns = 12;
 
 extern Texture spritesheet;
+extern std::vector<Ship*> ships;
