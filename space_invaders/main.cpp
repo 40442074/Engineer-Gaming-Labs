@@ -17,6 +17,9 @@ void Load() {
     }
     invader.setTexture(spritesheet);
     invader.setTextureRect(IntRect(0, 0, 32, 32));
+
+    Invader* inv = new Invader(IntRect(0, 0, 32, 32), { 100,100 });
+    ships.push_back(inv);
 }
 
 void Update(RenderWindow& window) {
