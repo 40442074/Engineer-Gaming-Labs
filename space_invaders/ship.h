@@ -7,11 +7,14 @@ class Ship : public Sprite {
 protected:
 	IntRect _sprite;
 	Ship();
+	bool _exploded = false;
 public:
 	explicit Ship(IntRect ir);
 	virtual ~Ship() = 0;
 	virtual void Update(const float& dt);
 	virtual void MoveDown() {}
+	bool is_exploded() const;
+	virtual void Explode();
 };
 
 class Invader : public Ship {

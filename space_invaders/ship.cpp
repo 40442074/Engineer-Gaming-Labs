@@ -15,6 +15,15 @@ Ship::Ship(IntRect ir) : Sprite() {
 
 void Ship::Update(const float& dt) {}
 
+void Ship::Explode() {
+	setTextureRect(IntRect(128, 32, 32, 32));
+	_exploded = true;
+}
+
+bool Ship::is_exploded() const {
+	return _exploded;
+}
+
 Ship::~Ship() = default;
 
 //****Invader****
