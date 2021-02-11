@@ -15,12 +15,14 @@ void Load() {
         cerr << "Failed to load spritesheet!" << endl;
     }
 
-    Invader* inv = new Invader(IntRect(0, 0, 32, 32), { 100,100 });
-    ships.push_back(inv);
-    Invader* inv2 = new Invader(IntRect(64, 0, 32, 32), { 200,200 });
-    ships.push_back(inv2);
-    Invader* inv3 = new Invader(IntRect(0, 0, 32, 32), { 300,300 });
-    ships.push_back(inv3);
+    for (int r = 0; r < invaders_rows; r++) {
+        auto rect = IntRect(r * 32, 0, 32, 32);
+        for (int c = 0; c < invaders_columns; c++) {
+            Vector2f position = { 16.0f + 50.0f*c, 16.0f + 50.0f*r};
+            auto inv = new Invader(rect, position);
+            ships.push_back(inv);
+        }
+    }
 }
 
 void Update(RenderWindow& window) {
@@ -39,11 +41,17 @@ void Render(RenderWindow& window) {
 }
 
 int main() {
-    RenderWindow window(VideoMode(gameWidth, gameHeight), "PONG");
+    RenderWindow window(VideoMode(gameWidth, gameHeight), "SPACE-INVADERS");
 
     Load();
 
     while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
         window.clear();
         Update(window);
         Render(window);

@@ -38,5 +38,5 @@ void Invader::Update(const float& dt) {
 	}
 }
 
-bool Invader::direction;
-float Invader::speed;
+bool Invader::direction = true;
+float Invader::speed = 20.0f;
