@@ -23,6 +23,9 @@ void Load() {
             ships.push_back(inv);
         }
     }
+
+    auto player = new Player();
+    ships.push_back(player);
 }
 
 void Update(RenderWindow& window) {
@@ -51,6 +54,9 @@ int main() {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+            window.close();
         }
         window.clear();
         Update(window);
