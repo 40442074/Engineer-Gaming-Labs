@@ -17,12 +17,12 @@ void Bullet::Render(RenderWindow& window) {
 	}
 }
 
-void Bullet::Fire(const Vector2f& pos, const bool mode, IntRect ir) {
+void Bullet::Fire(const Vector2f& pos, const bool mode) {
 	auto b = &bullets[bulletPointer++];
 	b->setPosition(pos);
 	b->_mode = mode;
 
-	b->_sprite = ir;
+	b->_sprite = IntRect(64, 32, 32, 32);
 	b->setTexture(spritesheet);
 	b->setTextureRect(b->_sprite);
 	b->setOrigin(16, 16);
