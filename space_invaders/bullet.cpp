@@ -45,7 +45,7 @@ void Bullet::_Update(const float& dt) {
 			}
 			if (!s->is_exploded() && s->getGlobalBounds().intersects(boundingBox)) {
 				s->Explode();
-				setPosition(-100, -100);
+  				setPosition(-100, -100);
 				return;
 			}
 		}

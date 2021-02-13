@@ -69,16 +69,19 @@ Player::Player() : Ship(IntRect(160, 32, 32, 32)) {
 void Player::Update(const float& dt) {
 	Ship::Update(dt);
 
+	static float firetime = 0.0f;
+	firetime -= dt;
+
 	if (Keyboard::isKeyPressed(controls[0])) {
 		move(dt * -100.0f, 0);		
 	}
 	if (Keyboard::isKeyPressed(controls[1])) {
 		move(dt * 100.0f, 0);
 	}
-	if (Keyboard::isKeyPressed(controls[2])) {
+	if (firetime <= 0 && Keyboard::isKeyPressed(controls[2])) {
 		Bullet::Fire(getPosition(), false, IntRect(64, 32, 32, 32));
+		firetime = 0.7f;
 	}
-
 
 	if (getPosition().x > gameWidth - 16) {
 		setPosition(gameWidth - 16, getPosition().y);
@@ -86,6 +89,7 @@ void Player::Update(const float& dt) {
 	if (getPosition().x < 16) {
 		setPosition(16, getPosition().y);
 	}
+
 }
 
 bool Player::is_player() const {
