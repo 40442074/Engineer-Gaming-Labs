@@ -1,5 +1,6 @@
 #include "ship.h"
 #include "game.h"
+#include "bullet.h"
 
 using namespace sf;
 using namespace std;
@@ -22,6 +23,10 @@ void Ship::Explode() {
 
 bool Ship::is_exploded() const {
 	return _exploded;
+}
+
+bool Ship::is_player() const {
+	return false;
 }
 
 Ship::~Ship() = default;
@@ -70,6 +75,10 @@ void Player::Update(const float& dt) {
 	if (Keyboard::isKeyPressed(controls[1])) {
 		move(dt * 100.0f, 0);
 	}
+	if (Keyboard::isKeyPressed(controls[2])) {
+		Bullet::Fire(getPosition(), false, IntRect(64, 32, 32, 32));
+	}
+
 
 	if (getPosition().x > gameWidth - 16) {
 		setPosition(gameWidth - 16, getPosition().y);
@@ -77,4 +86,8 @@ void Player::Update(const float& dt) {
 	if (getPosition().x < 16) {
 		setPosition(16, getPosition().y);
 	}
+}
+
+bool Player::is_player() const {
+	return true;
 }

@@ -7,9 +7,10 @@ class Bullet : public Sprite {
 public:
 	static void Update(const float& dt);
 	static void Render(RenderWindow& window);
-	static void Fire(const Vector2f& pos, const bool mode);
+	static void Fire(const Vector2f& pos, const bool mode, IntRect ir);
 	~Bullet() = default;
 protected:
+	IntRect _sprite;
 	static unsigned char bulletPointer;
 	static Bullet bullets[256];
 	void _Update(const float& dt);

@@ -6,19 +6,26 @@ using namespace std;
 Bullet::Bullet() {}
 
 void Bullet::Update(const float& dt) {
-	;
+	for (auto& b : Bullet::bullets) {
+		b._Update(dt);
+	}
 }
 
 void Bullet::Render(RenderWindow& window) {
-	for (Bullet b : Bullet::bullets) {
+	for (const auto b : Bullet::bullets) {
 		window.draw(b);
 	}
 }
 
-void Bullet::Fire(const Vector2f& pos, const bool mode) {
+void Bullet::Fire(const Vector2f& pos, const bool mode, IntRect ir) {
 	auto b = &bullets[bulletPointer++];
 	b->setPosition(pos);
 	b->_mode = mode;
+
+	b->_sprite = ir;
+	b->setTexture(spritesheet);
+	b->setTextureRect(b->_sprite);
+	b->setOrigin(16, 16);
 }
 
 void Bullet::_Update(const float& dt) {
@@ -30,10 +37,10 @@ void Bullet::_Update(const float& dt) {
 		const FloatRect boundingBox = getGlobalBounds();
 
 		for (auto s : ships) {
-			if (!_mode && typeid(s) == typeid(Player)) {
+			if (!_mode && s->is_player()) {
 				continue;
 			}
-			if (_mode && typeid(s) != typeid(Player)) {
+			if (_mode && !s->is_player()) {
 				continue;
 			}
 			if (!s->is_exploded() && s->getGlobalBounds().intersects(boundingBox)) {

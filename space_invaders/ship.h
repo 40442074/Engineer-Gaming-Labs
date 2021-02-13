@@ -14,6 +14,7 @@ public:
 	virtual void Update(const float& dt);
 	virtual void MoveDown() {}
 	bool is_exploded() const;
+	virtual bool is_player() const;
 	virtual void Explode();
 };
 
@@ -32,4 +33,5 @@ class Player : public Ship {
 public:
 	Player();
 	void Update(const float& dt) override;
+	bool is_player() const override;
 };

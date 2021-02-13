@@ -2,6 +2,7 @@
 #include <iostream>
 #include "game.h"
 #include "ship.h"
+#include "bullet.h"
 
 using namespace sf;
 using namespace std;
@@ -35,12 +36,16 @@ void Update(RenderWindow& window) {
     for (auto& s : ships) {
         s->Update(dt);
     }
+
+    Bullet::Update(dt);
 }
 
 void Render(RenderWindow& window) {
     for (const auto s : ships) {
         window.draw(*s);
     }
+
+    Bullet::Render(window);
 }
 
 int main() {

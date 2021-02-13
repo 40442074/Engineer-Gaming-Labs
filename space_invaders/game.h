@@ -9,9 +9,10 @@ constexpr uint16_t gameHeight = 600;
 constexpr uint16_t invaders_rows = 5;
 constexpr uint16_t invaders_columns = 12;
 
-const Keyboard::Key controls[2] = {
+const Keyboard::Key controls[3] = {
     Keyboard::Left,
-    Keyboard::Right
+    Keyboard::Right,
+    Keyboard::Space
 };
 
 extern Texture spritesheet;
