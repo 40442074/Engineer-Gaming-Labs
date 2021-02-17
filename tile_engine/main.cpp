@@ -1,19 +1,46 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include "player.h"
+
+using namespace sf;
+using namespace std;
+
+unique_ptr<Player> player(new Player());
+
+void Load() {
+
+}
+
+void Update() {
+    static Clock clock;
+    float dt = clock.restart().asSeconds();
+
+    player->Update(dt);
+}
+
+void Render(RenderWindow& window) {
+    player->Render(window);
+}
 
 int main(){
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.0f);
-    shape.setFillColor(sf::Color::Green);
+    RenderWindow window(sf::VideoMode(800, 450), "Tile Engine");
+
+    Load();
 
     while (window.isOpen()){
-        sf::Event event;
+        Event event;
         while (window.pollEvent(event)){
             if (event.type == sf::Event::Closed){
                 window.close();
             }
         }
+        if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+            window.close();
+        }
+
         window.clear();
-        window.draw(shape);
+        Update();
+        Render(window);
         window.display();
     }
     return 0;
