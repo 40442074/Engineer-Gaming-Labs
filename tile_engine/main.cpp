@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "player.h"
+#include "LevelSystem.h"
 
 using namespace sf;
 using namespace std;
@@ -8,7 +9,14 @@ using namespace std;
 unique_ptr<Player> player(new Player());
 
 void Load() {
+    ls::loadLevelFile("res/maze.txt");
 
+    for (size_t y = 0; y < ls::getHeight(); ++y) {
+        for (size_t x = 0; x < ls::getWidth(); ++x) {
+            cout << ls::getTile({ x, y });
+        }
+        cout << endl;
+    }
 }
 
 void Update() {
@@ -19,6 +27,7 @@ void Update() {
 }
 
 void Render(RenderWindow& window) {
+    ls::Render(window);
     player->Render(window);
 }
 
