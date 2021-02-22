@@ -5,7 +5,7 @@
 using namespace sf;
 using namespace std;
 
-unique_ptr<LevelSystem::TILE[]> LevelSystem::_sprites;
+unique_ptr<LevelSystem::TILE[]> LevelSystem::_tiles;
 size_t LevelSystem::_width;
 size_t LevelSystem::_height;
 Vector2f LevelSystem::_offset(0.0f, 0.0f);
