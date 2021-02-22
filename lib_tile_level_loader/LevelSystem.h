@@ -29,17 +29,20 @@ public:
 
 	static TILE getTileAt(sf::Vector2f);
 
+	static size_t getHeight();
+	static size_t getWidth();
+
 protected:
 	static std::unique_ptr<TILE[]> _tiles;
 	static size_t _width;
 	static size_t _height;
 	static sf::Vector2f _offset;
 	static float _tileSize;
-	static std::map<TILE, sf:Color> _colours;
+	static std::map<TILE, sf::Color> _colours;
 
 	static std::vector<std::unique_ptr<sf::RectangleShape>> _sprites;
 
-	static void buildSprited();
+	static void buildSprites();
 
 private:
 	LevelSystem() = delete;
