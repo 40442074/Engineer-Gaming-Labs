@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Windows.h"
 #include "player.h"
 #include "LevelSystem.h"
 
@@ -9,7 +10,11 @@ using namespace std;
 unique_ptr<Player> player(new Player());
 
 void Load() {
-    ls::loadLevelFile("res/maze.txt");
+    char c[MAX_PATH];
+    GetModuleFileName(NULL, c, MAX_PATH);
+    string s = string(c);
+    s = s.substr(0, s.find_last_of("\\/"));
+    ls::loadLevelFile(s + "\\res\\maze.txt");
 
     for (size_t y = 0; y < ls::getHeight(); ++y) {
         for (size_t x = 0; x < ls::getWidth(); ++x) {
