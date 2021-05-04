@@ -58,3 +58,10 @@ file(GLOB_RECURSE SOURCES tile_engine/*.cpp tile_engine/*.h)
 add_executable(TILE_ENGINE ${SOURCES})
 target_include_directories(TILE_ENGINE PRIVATE ${SFML_INCS})
 target_link_libraries(TILE_ENGINE lib_tile_level_loader lib_maths sfml-graphics)
+
+
+#### Pacman ####
+file(GLOB_RECURSE SOURCES pacman/*.cpp pacman/*.h)
+add_executable(PACMAN ${SOURCES})
+target_include_directories(PACMAN PRIVATE ${SFML_INCS})
+target_link_libraries(PACMAN lib_tile_level_loader lib_maths sfml-graphics)
